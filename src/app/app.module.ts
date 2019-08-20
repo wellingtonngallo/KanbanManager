@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { HttpClientModule } from '@angular/common/http';
 import { ListTodoComponent } from './list-todo/list-todo.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
 	declarations: [
@@ -20,6 +21,7 @@ import { ListTodoComponent } from './list-todo/list-todo.component';
 		BrowserAnimationsModule,
 		MatToolbarModule,
 		HttpClientModule,
+		DragDropModule,
 		RouterModule.forRoot([
 			{ path: '', component: ListTodoComponent },
 		  ])
