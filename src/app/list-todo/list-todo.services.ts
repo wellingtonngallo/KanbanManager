@@ -1,5 +1,4 @@
 import { HttpClient } from '@angular/common/http';
-import { async } from 'q';
 
 export class ListTodoServices {
     private url = 'https://tasks-homolog.k8s-platform-dev-us-east-1.fluig.io/tasks/api/v1/lists';

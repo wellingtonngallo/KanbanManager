@@ -3,7 +3,7 @@ import { ListTodoServices } from './list-todo.services';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
-	selector: 'list-todo',
+	selector: 'cardList',
 	templateUrl: './list-todo.component.html',
 	styleUrls: ['./list-todo.component.css'],
 	providers: [ListTodoServices]

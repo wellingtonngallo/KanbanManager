@@ -1,20 +1,50 @@
+.row {
+	padding: 20px
+}
+
 .drag-container {
-  width: 400px;
-  max-width: 100%;
-  margin: 0 25px 25px 0;
-  display: inline-block;
-  vertical-align: top;
-  background-color: #E9ECEF;
-  padding: 15px;
-  border-radius: 5px;
+	background-color: #dfe1e6;
+	display: inline-block;
+	max-width: 100%;
+	margin: 0 25px 25px 0;
+	padding: 15px;
+	width: 400px;
 }
 
 .section-heading {
-  padding: 5px 10px;
-  font-size: 15px;
-  font-weight: bold;
+	font-size: 14px;
+	font-weight: 500;
+	color: #172b4d;
+	padding: 5px 10px;
 }
 
-.container {
-  padding: 10px;
+.items-list {
+	min-height: 60px;
+	border-radius: 4px;
+	display: block;
+}
+
+.item-box {
+	border-radius: 4px;
+	padding: 8px 10px;
+	background-color: #FFF;
+	box-shadow: 0 1px 0 rgba(9,30,66,.25);
+	cursor: move;
+	font-size: 14px;
+}
+ 
+.cdk-drag-preview {
+	box-shadow: 0 1px 10px 1px rgba(0, 0, 0, 0.2);
+}
+ 
+.cdk-drag-placeholder {
+	opacity: 0;
+}
+ 
+.cdk-drag-animating {
+	transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+ 
+.item-list.cdk-drop-list-dragging .item-box:not(.cdk-drag-placeholder) {
+	transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
