@@ -1,10 +1,12 @@
 <div class="container">
-
 	<div class="row">
 		<div class="col-md-4" *ngFor="let list of lists">
 			<div class="drag-container">
 				<div class="section-heading">{{list.name}}</div>
+				<div cdkDropList id="{{list.id}}" [cdkDropListData]="list.tasks" [cdkDropListConnectedTo]="connectedTo" class="item-list" (cdkDropListDropped)="drop($event)">
+					<div class="item-box" *ngFor="let task of list.tasks" cdkDrag>{{task.name}}</div>
+				</div>
 			</div>
 		</div>
-	</div>
+	<div>
 </div>

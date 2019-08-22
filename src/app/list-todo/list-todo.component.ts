@@ -1,46 +1,59 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { ListTodoServices } from './list-todo.services';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
 	selector: 'list-todo',
 	templateUrl: './list-todo.component.html',
-	styleUrls: ['./list-todo.component.css']
+	styleUrls: ['./list-todo.component.css'],
+	providers: [ListTodoServices]
 })
 
 
 export class ListTodoComponent {
-	cors = 'https://cors-anywhere.herokuapp.com/'
-	config;
-	lists;
-	connectedTo = [];
-	headers = { 'Authorization': 'Basic ZGVtbzpzU2R4T1lEQU0zRkJO'};
+	private lists;
+	private connectedTo = [];
 
-	constructor(private http: HttpClient) {}
+	constructor(private listTodo: ListTodoServices) { }
 
-	async ngOnInit() {
-		this.config = await this.getAutorization();
-		this.mountList();
+	async ngOnInit() { 
+		this.lists = await this.fetchList();
+		this.fetchTasks();
 	}
 
-	async getAutorization() {
-		return this.http.post(
-			`${this.cors}https://accounts.homolog.fluig.io/accounts/oauth/token?grant_type=password&response_type=token&client_id=demo&username=wellingtong@desafiofluig.com&password=WellingtonGa@123`,
-			null,
-			{headers: this.headers}
-		).toPromise();
+	async fetchList() {
+		return this.listTodo.getLists().then((listTodo: ListTodoServices[]) => {
+			return listTodo
+		});
 	}
 
-	mountList() {
-		this.http.get(`${this.cors}https://tasks-homolog.k8s-platform-dev-us-east-1.fluig.io/tasks/api/v1/lists?page=1&pageSize=1000`,
-			{ headers: { 'Authorization':`${this.config.token_type} ${this.config.access_token}`}}
-		).subscribe((data: any) => {
-			this.lists = data.items;
-		 });
+	fetchTasks() {
+		this.lists.map(list => {
+			this.listTodo.getTasks(list.id).then((listTodo: ListTodoServices[]) => {
+				listTodo.length && this.applyTaskInList(listTodo);
+			});
+		});
 	}
 
-	connectDrag() {
-		for (let item of this.lists.items) {
+	findTaskListById(element) {
+		this.lists.map(item => {
+			if (item.id === element.listId)
+				return item = Object.assign(item, {tasks: [element]});
+	
+			item = Object.assign(item, {tasks: []});
+		});
+
+		this.connectDrag(this.lists);
+	}
+
+	applyTaskInList(task) {
+		task.forEach(element => {
+			this.findTaskListById(element);
+		});
+	}
+
+	connectDrag(lists) {
+		for (let item of lists) {
 			this.connectedTo.push(item.id);
 		};
 	}
