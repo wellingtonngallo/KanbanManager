@@ -1,0 +1,27 @@
+
+<h1 mat-dialog-title>Criar tarefa</h1>
+<form #createTaskForm="ngForm" >
+	<input
+		type="text"
+		name="name" 
+		class="form-control mb-4"
+		placeholder="Nome da tarefa"
+		[(ngModel)]="task.name"
+		required
+	/>
+	<input
+		type="text"
+		name="description"
+		class="form-control mb-4"
+		placeholder="Descrição da tarefa"
+		[(ngModel)]="task.description"
+		required
+	>
+	<button
+		type="submit"
+		class="btn btn-primary"
+		(click)="saveTask(createTaskForm, data.idList)"
+		>
+			Salvar
+	</button>
+</form>

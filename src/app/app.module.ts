@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,11 +8,15 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { HttpClientModule } from '@angular/common/http';
 import { ListTodoComponent } from './list-todo/list-todo.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import {MatDialogModule} from '@angular/material/dialog';
+import { CreateTaskComponent } from './create-task/create-task.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
 	declarations: [
 		AppComponent,
-		ListTodoComponent
+		ListTodoComponent,
+		CreateTaskComponent
 	],
 	imports: [
 		BrowserModule,
@@ -22,11 +25,11 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 		MatToolbarModule,
 		HttpClientModule,
 		DragDropModule,
-		RouterModule.forRoot([
-			{ path: '', component: ListTodoComponent },
-		  ])
+		MatDialogModule,
+		FormsModule
 	],
 	providers: [],
+	entryComponents: [CreateTaskComponent],
 	bootstrap: [AppComponent]
 })
 
