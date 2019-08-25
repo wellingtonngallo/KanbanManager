@@ -20,7 +20,7 @@ export class ListTodoComponent {
 		private dialog: MatDialog
 	) {}
 
-	async ngOnInit() { 
+	async ngOnInit() {
 		await this.listTodo.getAutorization();
 		this.lists = await this.fetchList();
 		this.formattedObjectLists();
@@ -72,9 +72,9 @@ export class ListTodoComponent {
 		};
 	}
 	
-	createTask(idList) {
+	createTask(list) {
 		this.dialog.open(CreateTaskComponent, {
-			data: {idList: idList},
+			data: {idList: list.id, list: list},
 			width: '600px'
 		});
 	}

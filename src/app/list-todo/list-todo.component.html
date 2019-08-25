@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-md-4" *ngFor="let list of lists">
 		<div class="drag-container">
-			<span class="addIcon" (click)="createTask(list.id)">+</span>
+			<span class="addIcon" (click)="createTask(list)">+</span>
 			<div class="section-heading">{{list.name}}</div>
 			<div cdkDropList id="{{list.id}}" [cdkDropListData]="list.tasks" [cdkDropListConnectedTo]="connectedTo" class="items-list" (cdkDropListDropped)="drop($event)">
 				<div class="item-box" *ngFor="let task of list.tasks" cdkDrag>

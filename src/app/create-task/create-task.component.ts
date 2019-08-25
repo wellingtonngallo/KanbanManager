@@ -11,7 +11,6 @@ import { AppServices } from '../services/app-services.component';
 	providers: [AppServices]
 })
 
-
 export class CreateTaskComponent implements OnInit {
 	task: any;
 	
@@ -23,7 +22,7 @@ export class CreateTaskComponent implements OnInit {
 
     saveTask(createTaskForm: FormGroup, idList) {
 		this.service.saveTask(this.task, idList).subscribe(response => {
-			console.log(response);
+			this.data.list.tasks.push(response);
 			createTaskForm.reset()
 		});
     }
