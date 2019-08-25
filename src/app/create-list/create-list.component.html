@@ -1,0 +1,27 @@
+
+<h1 mat-dialog-title>Criar Lista</h1>
+<form #createListForm="ngForm" >
+	<input
+		type="text"
+		name="name" 
+		class="form-control mb-4"
+		placeholder="Nome da lista"
+		[(ngModel)]="list.name"
+		required
+	/>
+	<input
+		type="text"
+		name="description"
+		class="form-control mb-4"
+		placeholder="Descrição da lista"
+		[(ngModel)]="list.description"
+		required
+	>
+	<button
+		type="submit"
+		class="btn btn-primary"
+		(click)="saveList(createListForm)"
+		>
+			Salvar
+	</button>
+</form>

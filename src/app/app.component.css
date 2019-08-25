@@ -2,3 +2,7 @@
     overflow-x: hidden;
     width: 100%
 }
+
+.space {
+    flex: 1 1 auto;
+}

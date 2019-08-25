@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ListTodoServices } from './list-todo.services';
+import { AppServices } from '../services/app-services.component';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { MatDialog } from "@angular/material";
 import { CreateTaskComponent } from "../create-task/create-task.component";
@@ -8,7 +8,7 @@ import { CreateTaskComponent } from "../create-task/create-task.component";
 	selector: 'cardList',
 	templateUrl: './list-todo.component.html',
 	styleUrls: ['./list-todo.component.css'],
-	providers: [ListTodoServices]
+	providers: [AppServices]
 })
 
 export class ListTodoComponent {
@@ -16,25 +16,24 @@ export class ListTodoComponent {
 	private connectedTo = [];
 
 	constructor(
-		private listTodo: ListTodoServices,
+		private listTodo: AppServices,
 		private dialog: MatDialog
 	) {}
 
 	async ngOnInit() { 
+		await this.listTodo.getAutorization();
 		this.lists = await this.fetchList();
 		this.formattedObjectLists();
 		this.fetchTasks();
 	}
 
 	async fetchList() {
-		return this.listTodo.getLists().then((listTodo: ListTodoServices[]) => {
-			return listTodo
-		});
+		return this.listTodo.getLists();
 	}
 
 	fetchTasks() {
 		this.lists.map(list => {
-			this.listTodo.getTasks(list.id).then((listTodo: ListTodoServices[]) => {
+			this.listTodo.getTasks(list.id).then((listTodo: AppServices[]) => {
 				listTodo.length && this.applyTaskInList(listTodo);
 			});
 		});
@@ -79,6 +78,7 @@ export class ListTodoComponent {
 			width: '600px'
 		});
 	}
+
 	drop(event: CdkDragDrop<string[]>) {
 		if (event.previousContainer === event.container) {
 			moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
