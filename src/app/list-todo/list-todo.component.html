@@ -1,12 +1,18 @@
 <div class="row">
 	<div class="col-md-4" *ngFor="let list of lists">
-		<div class="drag-container">
+		<div class="dragContainer">
 			<span class="addIcon" (click)="createTask(list)">+</span>
-			<div class="section-heading">{{list.name}}</div>
-			<div cdkDropList id="{{list.id}}" [cdkDropListData]="list.tasks" [cdkDropListConnectedTo]="connectedTo" class="items-list" (cdkDropListDropped)="drop($event)">
-				<div class="item-box" *ngFor="let task of list.tasks" cdkDrag>
+			<div class="deleteList">
+				<button class="btn btn-danger btn-sm" (click)="removeList(list.id)">Excluir Lista</button>
+			</div>
+			<div class="sectionHeading">{{list.name}}</div>
+			<div cdkDropList id="{{list.id}}" [cdkDropListData]="list.tasks" [cdkDropListConnectedTo]="connectedTo" class="itemsList" (cdkDropListDropped)="drop($event)">
+				<div class="itemBox" *ngFor="let task of list.tasks" cdkDrag>
 					<span class="taskName">{{task.name}}</span>
 					<span class="taskDescription">{{task.description}}</span>
+					<div class="buttonDelete">
+						<button class="btn btn-danger btn-sm" (click)="removeTask(list.id, task.id)">Excluir</button>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, SimpleChange, SimpleChanges } from '@angular/core';
 import { AppServices } from '../services/app-services.component';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { MatDialog } from "@angular/material";
@@ -29,6 +29,13 @@ export class ListTodoComponent {
 
 	async fetchList() {
 		return this.listTodo.getLists();
+	}
+
+	addList(list) {
+		list.tasks = [];
+
+		this.lists.push(list);
+		this.connectDrag(this.lists);
 	}
 
 	fetchTasks() {
@@ -76,6 +83,25 @@ export class ListTodoComponent {
 		this.dialog.open(CreateTaskComponent, {
 			data: {idList: list.id, list: list},
 			width: '600px'
+		});
+	}
+
+	removeTask(idList, idTask) {
+		this.listTodo.removeTask(idList, idTask).subscribe(() => {
+			this.lists.map(item => {
+				if (item.id === idList)
+					item.tasks = item.tasks.filter(task => {
+						return task.id !== idTask;
+					});
+			});
+		});
+	}
+
+	removeList(idList) {
+		this.listTodo.removeList(idList).subscribe(() => {
+			this.lists = this.lists.filter(item => {
+				return item.id !== idList
+			});
 		});
 	}
 

@@ -1,7 +1,7 @@
 <mat-toolbar color="primary">
 	<span>Kanban Manager</span>
 	<span class="space"></span>
-	<createButtonList></createButtonList>
+	<createButtonList (appendList)="renderList($event)"></createButtonList>
 </mat-toolbar>
 
 <div class="teste">

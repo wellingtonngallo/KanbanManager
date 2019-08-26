@@ -59,4 +59,24 @@ export class AppServices {
                 'Content-Type': 'application/json'
             }});
     }
+
+    public removeTask(idList, idTask) {
+        let config = JSON.parse(localStorage.getItem('config'));
+
+        return this.http.delete(`${this.cors}${this.url}${idList}/tasks/${idTask}`,
+            {headers: {
+                'Authorization': `${config.token_type} ${config.access_token}`,
+                'Content-Type': 'application/json'
+            }});
+    }
+
+    public removeList(idList) {
+        let config = JSON.parse(localStorage.getItem('config'));
+
+        return this.http.delete(`${this.cors}${this.url}${idList}`,
+            {headers: {
+                'Authorization': `${config.token_type} ${config.access_token}`,
+                'Content-Type': 'application/json'
+            }});
+    }
 }

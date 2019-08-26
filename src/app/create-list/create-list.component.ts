@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { AppServices } from '../services/app-services.component';
@@ -9,8 +9,9 @@ import { AppServices } from '../services/app-services.component';
 	providers: [AppServices]
 })
 
+export class CreateListComponent {
+	@Output() appendList = new EventEmitter();
 
-export class CreateListComponent implements OnInit {
 	list: any;
 	
 	constructor(private service: AppServices) {}
@@ -21,8 +22,8 @@ export class CreateListComponent implements OnInit {
 
     saveList(createTaskForm: FormGroup) {
 		this.service.saveList(this.list).subscribe(response => {
-			console.log(response);
+			this.appendList.emit(response);
 			createTaskForm.reset()
 		});
-    }
+	}
 } 

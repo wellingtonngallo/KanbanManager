@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from "@angular/material";
 import { CreateListComponent } from "./create-list.component";
 
@@ -11,13 +11,21 @@ import { AppServices } from '../services/app-services.component';
 })
 
 export class CreateListButtonComponent {
+	private createListModal;
+
+	@Output() appendList = new EventEmitter();
+
     constructor(
 		private dialog: MatDialog
-    ) {}
-    
+	) {}
+	
     createList() {
-        this.dialog.open(CreateListComponent, {
+		this.createListModal = this.dialog.open(CreateListComponent, {
 			width: '600px'
 		});
-    }   
+
+		this.createListModal.componentInstance.appendList.subscribe(response => {
+			this.appendList.emit(response);
+		});
+	}
 } 
