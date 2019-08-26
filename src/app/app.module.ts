@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 
 import { AppComponent } from './app.component';
 import { ListTodoComponent } from './list-todo/list-todo.component';
@@ -31,7 +32,8 @@ import { CreateListButtonComponent } from './create-list/create-list-button.comp
 		HttpClientModule,
 		DragDropModule,
 		MatDialogModule,
-		FormsModule
+		FormsModule,
+		MatIconModule
 	],
 	providers: [],
 	entryComponents: [CreateTaskComponent, CreateListComponent, CreateListButtonComponent],

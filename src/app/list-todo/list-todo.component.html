@@ -3,15 +3,16 @@
 		<div class="dragContainer">
 			<span class="addIcon" (click)="createTask(list)">+</span>
 			<div class="deleteList">
-				<button class="btn btn-danger btn-sm" (click)="removeList(list.id)">Excluir Lista</button>
+				<mat-icon (click)="removeList(list.id)">restore_from_trash</mat-icon>
 			</div>
+			
 			<div class="sectionHeading">{{list.name}}</div>
 			<div cdkDropList id="{{list.id}}" [cdkDropListData]="list.tasks" [cdkDropListConnectedTo]="connectedTo" class="itemsList" (cdkDropListDropped)="drop($event)">
 				<div class="itemBox" *ngFor="let task of list.tasks" cdkDrag>
 					<span class="taskName">{{task.name}}</span>
 					<span class="taskDescription">{{task.description}}</span>
 					<div class="buttonDelete">
-						<button class="btn btn-danger btn-sm" (click)="removeTask(list.id, task.id)">Excluir</button>
+						<mat-icon (click)="removeTask(list.id, task.id)">restore_from_trash</mat-icon>
 					</div>
 				</div>
 			</div>

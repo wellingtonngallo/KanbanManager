@@ -64,11 +64,13 @@
 }
 
 .buttonDelete {
+	cursor: pointer;
 	position: relative;
 	float: right;
-	bottom: 26px;
+	bottom: 22px;
 }
 
 .deleteList {
+	cursor: pointer;
 	float: right;
 }
